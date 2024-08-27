@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+table,
+th,
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+table {
+  width: 60%;
+  border-collapse: collapse;
+  border: 2px black solid;
+}
+
+th,
+td {
+  text-align: center;
+  height: 36px;
+}
+
+th {
+  height: 44px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: lightblue;
+}
+
+.delete {
+  background-color: red;
+  color: black;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 8px 12px;
+  border: 2px red solid;
+}
+
+.delete:hover {
+  border: 2px black solid;
+}
