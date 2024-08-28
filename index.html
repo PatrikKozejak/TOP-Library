@@ -23,7 +23,35 @@
         </thead>
         <tbody class="tableBody"></tbody>
       </table>
+
+      <button class="add">Add a Book</button>
     </div>
+    <dialog>
+      <div class="container">
+        <button class="close-modal" autofocus>Close</button>
+        <form action="" method="post" class="form">
+          <div class="form">
+            <label for="bookTitle">Title of the Book: </label>
+            <input type="text" name="title" id="bookTitle" required />
+          </div>
+          <div class="form">
+            <label for="bookAuthor">Author of the Book: </label>
+            <input type="text" name="author" id="bookAuthor" required />
+          </div>
+          <div class="form">
+            <label for="bookPages">Number of Pages: </label>
+            <input type="tel" name="pages" id="bookPages" required />
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" name="read" id="bookRead" />
+            <label for="read">Book already read? </label>
+          </div>
+          <div class="submit-div">
+            <button class="create" type="submit">Create Book</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
     <script src="js/script.js"></script>
   </body>
 </html>

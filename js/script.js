@@ -1,5 +1,19 @@
 const myLibrary = [];
 
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector(".add");
+const closeButton = document.querySelector(".close-modal");
+
+// "Show the dialog" button opens the dialog modally
+showButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+// "Close" button closes the dialog
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;

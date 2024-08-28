@@ -1,11 +1,13 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 table,
@@ -23,14 +25,19 @@ table {
 th,
 td {
   text-align: center;
-  height: 36px;
-}
-
-th {
   height: 44px;
 }
 
+th {
+  font-size: 20px;
+  height: 48px;
+}
+
 tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+thead tr {
   background-color: #f2f2f2;
 }
 
@@ -38,15 +45,102 @@ tr:hover {
   background-color: lightblue;
 }
 
-.delete {
-  background-color: red;
+button {
   color: black;
   font-weight: 600;
   border-radius: 12px;
+}
+
+.delete {
+  background-color: rgb(255, 69, 69);
+  border: 4px red solid;
   padding: 8px 12px;
-  border: 2px red solid;
+}
+
+.add,
+.create {
+  margin-top: 24px;
+  background-color: rgb(69, 69, 255);
+  border: 4px blue solid;
+  color: white;
+  padding: 8px 60px;
 }
 
 .delete:hover {
+  background-color: red;
+}
+
+.add,
+.create:hover {
+  background-color: blue;
+}
+
+caption {
+  font-size: 32px;
+  background-color: black;
+  color: white;
   border: 2px black solid;
+  height: 68px;
+  font-weight: 600;
+  padding: 12px;
+}
+
+dialog {
+  margin: 10% auto;
+  width: 80%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 34px;
+  border: 0;
+  border-radius: 5px;
+}
+
+::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+div.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.submit-div {
+  align-self: center;
+}
+
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  padding: 8px 16px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  margin: 8px 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.close-modal {
+  align-self: flex-end;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.close-modal:hover {
+  border: 1px solid black;
 }
