@@ -70,7 +70,7 @@ button {
   background-color: red;
 }
 
-.add,
+.add:hover,
 .create:hover {
   background-color: blue;
 }

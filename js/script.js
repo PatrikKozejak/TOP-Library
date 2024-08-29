@@ -3,22 +3,43 @@ const myLibrary = [];
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector(".add");
 const closeButton = document.querySelector(".close-modal");
+const createButton = document.querySelector(".create");
+const bookTitle = document.querySelector("#bookTitle");
+const bookAuthor = document.querySelector("#bookAuthor");
+const bookPages = document.querySelector("#bookPages");
+const bookRead = document.querySelector("#bookRead");
+const form = document.querySelector("form.form");
 
-// "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
   dialog.showModal();
 });
 
-// "Close" button closes the dialog
 closeButton.addEventListener("click", () => {
   dialog.close();
 });
+
+createButton.addEventListener("click", createButtonClick, false);
 
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+}
+
+function createButtonClick(event) {
+  event.preventDefault();
+
+  let createdBook = new Book(
+    bookTitle.value,
+    bookAuthor.value,
+    bookPages.value,
+    bookRead.checked
+  );
+  myLibrary.push(createdBook);
+  form.reset();
+  dialog.close();
+  displayBooks();
 }
 
 let book1 = new Book("HP", "Rowling", 520, false);
@@ -45,9 +66,7 @@ function createDeleteButton(bookIndex) {
 }
 
 function deleteBook(bookIndex) {
-  console.log(bookIndex);
   myLibrary.splice(bookIndex, 1);
-  console.log(myLibrary);
   displayBooks();
 }
 
@@ -79,14 +98,14 @@ function displayBooks() {
     deleteCell.appendChild(createDeleteButton(book));
   }
   tableBody.parentNode.replaceChild(newTbody, tableBody);
+
+  const deleteButtons = document.querySelectorAll(".delete");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      deleteBook(e.target.getAttribute("index"));
+    });
+  });
 }
 
 displayBooks();
-
-const deleteButtons = document.querySelectorAll(".delete");
-
-deleteButtons.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    deleteBook(e.target.getAttribute("index"));
-  });
-});
