@@ -124,10 +124,6 @@ input[type="tel"] {
   box-sizing: border-box;
 }
 
-input[type="checkbox"] {
-  margin: 8px 0;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -143,4 +139,68 @@ input[type="checkbox"] {
 
 .close-modal:hover {
   border: 1px solid black;
+}
+
+label.read-check-label {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  position: relative;
+}
+
+label.read-check-label span {
+  position: absolute;
+}
+
+input#read-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  border: 2px solid black;
+  background: #eee;
+  transition: all 0.4s;
+  position: relative;
+}
+.checkbox-cell {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input#read-checkbox::before {
+  width: 16px;
+  height: 16px;
+  border-radius: 9px;
+  background-color: black;
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 8%;
+  transition: all 0.4s;
+}
+input#read-checkbox:checked {
+  background-color: rgb(0, 201, 0);
+  transition: all 0.4s;
+}
+
+input#read-checkbox:checked::before {
+  left: 52%;
+  transition: all 0.4s;
+}
+
+input#read-checkbox ~ label .on,
+input#read-checkbox:checked ~ label .off {
+  opacity: 0;
+}
+
+input#read-checkbox ~ label .off,
+input#read-checkbox:checked ~ label .on {
+  opacity: 1;
+}
+
+input:focus {
+  outline: 1px dotted black;
 }

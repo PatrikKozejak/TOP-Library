@@ -65,8 +65,23 @@ function createDeleteButton(bookIndex) {
   return deleteButton;
 }
 
+function createReadCheckbox(bookIndex) {
+  let readCheckbox = document.createElement("input");
+  readCheckbox.setAttribute("type", "checkbox");
+  readCheckbox.setAttribute("class", "read-checkbox");
+  readCheckbox.setAttribute("index", bookIndex);
+  readCheckbox.setAttribute("id", "read-checkbox");
+
+  return readCheckbox;
+}
+
 function deleteBook(bookIndex) {
   myLibrary.splice(bookIndex, 1);
+  displayBooks();
+}
+
+function changeReadStatus(bookIndex) {
+  myLibrary[bookIndex].read = !myLibrary[bookIndex].read;
   displayBooks();
 }
 
@@ -91,8 +106,25 @@ function displayBooks() {
     pagesCell.appendChild(newPages);
 
     let readCell = newRow.insertCell(3);
-    let newRead = document.createTextNode(currentBook.read);
-    readCell.appendChild(newRead);
+    readCell.setAttribute("class", "checkbox-cell");
+    let newReadCheckbox = createReadCheckbox(book);
+    newReadCheckbox.checked = currentBook.read;
+    readCell.appendChild(newReadCheckbox);
+
+    let readLabel = document.createElement("label");
+    readLabel.setAttribute("for", "read-checkbox");
+    readLabel.setAttribute("class", "read-check-label");
+    readCell.appendChild(readLabel);
+
+    let onSpan = document.createElement("span");
+    onSpan.setAttribute("class", "on");
+    onSpan.innerText = "Read";
+    let offSpan = document.createElement("span");
+    offSpan.setAttribute("class", "off");
+    offSpan.innerText = "Unread";
+
+    readLabel.appendChild(onSpan);
+    readLabel.appendChild(offSpan);
 
     let deleteCell = newRow.insertCell(4);
     deleteCell.appendChild(createDeleteButton(book));
@@ -104,6 +136,14 @@ function displayBooks() {
   deleteButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       deleteBook(e.target.getAttribute("index"));
+    });
+  });
+
+  const readCheckboxes = document.querySelectorAll(".read-checkbox");
+
+  readCheckboxes.forEach((box) => {
+    box.addEventListener("change", (e) => {
+      changeReadStatus(e.target.getAttribute("index"));
     });
   });
 }
