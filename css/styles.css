@@ -152,7 +152,7 @@ label.read-check-label span {
   position: absolute;
 }
 
-input#read-checkbox {
+input.read-checkbox {
   -webkit-appearance: none;
   appearance: none;
   width: 44px;
@@ -170,7 +170,7 @@ input#read-checkbox {
   justify-content: center;
 }
 
-input#read-checkbox::before {
+input.read-checkbox::before {
   width: 16px;
   height: 16px;
   border-radius: 9px;
@@ -181,23 +181,23 @@ input#read-checkbox::before {
   left: 8%;
   transition: all 0.4s;
 }
-input#read-checkbox:checked {
+input.read-checkbox:checked {
   background-color: rgb(0, 201, 0);
   transition: all 0.4s;
 }
 
-input#read-checkbox:checked::before {
+input.read-checkbox:checked::before {
   left: 52%;
   transition: all 0.4s;
 }
 
-input#read-checkbox ~ label .on,
-input#read-checkbox:checked ~ label .off {
+input.read-checkbox ~ label .on,
+input.read-checkbox:checked ~ label .off {
   opacity: 0;
 }
 
-input#read-checkbox ~ label .off,
-input#read-checkbox:checked ~ label .on {
+input.read-checkbox ~ label .off,
+input.read-checkbox:checked ~ label .on {
   opacity: 1;
 }
 
