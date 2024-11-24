@@ -8,16 +8,6 @@ const bookPages = document.querySelector("#bookPages");
 const bookRead = document.querySelector("#bookRead");
 const form = document.querySelector("form.form");
 
-showButton.addEventListener("click", () => {
-  dialog.showModal();
-});
-
-closeButton.addEventListener("click", () => {
-  dialog.close();
-});
-
-createButton.addEventListener("click", createButtonClick, false);
-
 class Book {
   constructor(title, author, pages, read) {
     this._title = title;
@@ -68,23 +58,75 @@ class Library {
     this._books.splice(bookIndex, 1);
   }
 }
+showButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});
+
+createButton.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const valid =
+    bookTitle.validity.valid &&
+    bookAuthor.validity.valid &&
+    bookPages.validity.valid;
+  if (valid) {
+    let createdBook = new Book(
+      bookTitle.value,
+      bookAuthor.value,
+      bookPages.value,
+      bookRead.checked
+    );
+    myLibrary.addBookToLibrary(createdBook);
+    form.reset();
+    dialog.close();
+    displayBooks();
+  } else {
+    showBookPagesError();
+    showBookAuthorError();
+    showBookTitleError();
+  }
+});
+
+bookTitle.addEventListener("input", (event) => {
+  console.log(bookTitle.validity.valueMissing);
+  if (bookTitle.validity.valueMissing) {
+    bookTitle.setCustomValidity("Please fill in this field");
+    bookTitle.reportValidity();
+  } else {
+    bookTitle.setCustomValidity("");
+    bookTitle.className = "";
+  }
+});
+
+bookAuthor.addEventListener("input", (event) => {
+  if (bookAuthor.validity.valueMissing) {
+    bookAuthor.setCustomValidity("Please fill in this field");
+    bookAuthor.reportValidity();
+  } else {
+    bookAuthor.setCustomValidity("");
+    bookAuthor.className = "";
+  }
+});
+
+bookPages.addEventListener("input", (event) => {
+  if (bookPages.validity.valueMissing) {
+    bookPages.setCustomValidity("Please fill in this field");
+  } else if (bookPages.validity.patterMismatch) {
+    bookPages.setCustomValidity("Please enter numeric value");
+  } else {
+    bookPages.setCustomValidity("");
+    bookPages.className = "";
+  }
+  bookPages.reportValidity();
+});
 
 let myLibrary = new Library();
 
-function createButtonClick(event) {
-  event.preventDefault();
-
-  let createdBook = new Book(
-    bookTitle.value,
-    bookAuthor.value,
-    bookPages.value,
-    bookRead.checked
-  );
-  myLibrary.addBookToLibrary(createdBook);
-  form.reset();
-  dialog.close();
-  displayBooks();
-}
+function submitForm(event) {}
 
 let book1 = new Book("HP", "Rowling", 520, false);
 
@@ -189,6 +231,63 @@ function displayBooks() {
       changeReadStatus(e.target.getAttribute("index"));
     });
   });
+}
+
+// function showError() {
+//   const inputs = [bookTitle, bookAuthor, bookPages];
+
+//   inputs.forEach((inputElement) => {
+//     if (inputElement.validity.valueMissing) {
+//       inputElement.className = "invalid";
+//       console.log("setting custom validity");
+//       inputElement.setCustomValidity("Please fill in this field");
+//     } else if (inputElement.validity.patterMismatch) {
+//       inputElement.className = "invalid";
+//       inputElement.setCustomValidity("Please enter numeric value");
+//     } else {
+//       inputElement.setCustomValidity("");
+//     }
+//   });
+// }
+
+function showBookTitleError() {
+  console.log("title");
+  if (bookTitle.validity.valueMissing) {
+    bookTitle.className = "invalid";
+    bookTitle.setCustomValidity("Please enter title of the book");
+    bookTitle.reportValidity();
+  } else {
+    bookTitle.setCustomValidity("");
+    bookTitle.reportValidity();
+  }
+}
+
+function showBookAuthorError() {
+  console.log("author");
+  if (bookAuthor.validity.valueMissing) {
+    bookAuthor.className = "invalid";
+    bookAuthor.setCustomValidity("Please enter author of the book");
+    bookAuthor.reportValidity();
+  } else {
+    bookAuthor.setCustomValidity("");
+    bookAuthor.reportValidity();
+  }
+}
+
+function showBookPagesError() {
+  console.log("pages");
+  if (bookPages.validity.valueMissing) {
+    bookPages.className = "invalid";
+    bookPages.setCustomValidity("Please enter number of pages of the book");
+    bookPages.reportValidity();
+  } else if (bookPages.validity.patterMismatch) {
+    bookPages.className = "invalid";
+    bookPages.setCustomValidity("Please enter numeric value");
+    bookPages.reportValidity();
+  } else {
+    bookPages.setCustomValidity("");
+    bookPages.reportValidity();
+  }
 }
 
 displayBooks();

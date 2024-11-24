@@ -29,7 +29,7 @@
     <dialog>
       <div class="container">
         <button class="close-modal" autofocus>Close</button>
-        <form action="" method="post" class="form">
+        <form action="" method="post" class="form" novalidate>
           <div class="form">
             <label for="bookTitle">Title of the Book: </label>
             <input type="text" name="title" id="bookTitle" required />
@@ -40,7 +40,13 @@
           </div>
           <div class="form">
             <label for="bookPages">Number of Pages: </label>
-            <input type="tel" name="pages" id="bookPages" required />
+            <input
+              type="number"
+              pattern="[0-9]"
+              name="pages"
+              id="bookPages"
+              required
+            />
           </div>
           <div class="form-checkbox">
             <label for="bookRead">Book already read? </label>
